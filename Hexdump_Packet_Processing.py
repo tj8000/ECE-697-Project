@@ -1,0 +1,83 @@
+import pandas as pd
+import numpy as np
+import re
+
+# Read in hex line number list
+hex_line_nums = pd.read_csv('hex_line_nums.csv', header=None)
+hex_line_nums = np.array(hex_line_nums)
+
+# Read in pcap txt hexdump data
+txt = open('SUEE1.txt', 'r')
+data = txt.read()
+
+
+# Find all instances of a sub string in a string
+def find_all(_str, _sub_str):
+    start = 0
+    while True:
+        start = _str.find(_sub_str, start)
+        if start == -1:
+            return
+        yield [_sub_str, start]
+        start += len(_sub_str)
+
+
+# Find the indexes of where each packet starts
+def get_pkt_line_srt_idx(_data):
+    line_num_idx = []
+    pattern = re.compile('|'.join(hex_line_nums[:, 0] + r'  +[0-9a-f]+[0-9a-f]'))
+    matches = pattern.finditer(_data)
+    matches = list(matches)
+    idx = [m.start(0) for m in matches]
+    for i in range(len(matches)):
+        line_num_idx.append([matches[i][0], idx[i]])
+    return np.array(line_num_idx)
+
+
+# Function to convert hexadecimal to binary
+def convert_hex_to_bin(_byte):
+    scale = 16
+    num_of_bits = 8
+    return bin(int(_byte, scale))[2:].zfill(num_of_bits)
+
+
+# Function to parse each packets hexdump data into an array of binary values
+def parse_pkt_hex_data(_data):
+    pkt = ''
+    pkt_bytes = []
+    line_num_idx = get_pkt_line_srt_idx(_data)
+    for i in range(len(line_num_idx)):
+        if i < len(line_num_idx) - 1:
+            temp = _data[int(line_num_idx[i, 1]):int(line_num_idx[i + 1, 1])]
+            hex_srt = temp.find('  ')
+            hex_end = temp.find('   ')
+            temp = temp[hex_srt + 2:hex_end].replace(' ', '')
+            pkt = pkt + temp
+            if line_num_idx[i + 1, 0][:4] == hex_line_nums[0]:
+                pkt = "{:0<3036}".format(pkt)
+                pkt_hex_bytes = re.findall('..', pkt)
+                for j in range(len(pkt_hex_bytes)):
+                    pkt_bytes.append(convert_hex_to_bin(pkt_hex_bytes[j]))
+                f = open(r'D:\ECE697\packets.txt', 'a')
+                f.write(str(pkt_bytes)[1:-1] + '\n')
+                f.close()
+                pkt = ''
+                pkt_bytes = []
+        else:
+            temp = _data[int(line_num_idx[i, 1]):]
+            hex_srt = temp.find('  ')
+            hex_end = temp.find('   ')
+            temp = temp[hex_srt + 2:hex_end].replace(' ', '')
+            pkt = pkt + temp
+            pkt = "{:0<3036}".format(pkt)
+            pkt_hex_bytes = re.findall('..', pkt)
+            for j in range(len(pkt_hex_bytes)):
+                pkt_bytes.append(convert_hex_to_bin(pkt_hex_bytes[j]))
+            f = open(r'D:\ECE697\packets.txt', 'a')
+            f.write(str(pkt_bytes)[1:-1])
+            f.close()
+            pkt = ''
+            pkt_bytes = []
+
+
+parse_pkt_hex_data(data)

@@ -1,13 +1,16 @@
-import pandas as pd
+mport pandas as pd
 import numpy as np
 import re
+
+hexdump_file_path = input('Enter hexdump txt file path:')
+pkt_export_file_path = input('Enter file path to export packet bytes file:')
 
 # Read in hex line number list
 hex_line_nums = pd.read_csv('hex_line_nums.csv', header=None)
 hex_line_nums = np.array(hex_line_nums)
 
 # Read in pcap txt hexdump data
-txt = open('SUEE1.txt', 'r')
+txt = open(hexdump_file_path, 'r')
 data = txt.read()
 
 
@@ -43,39 +46,39 @@ def convert_hex_to_bin(_byte):
 
 # Function to parse each packets hexdump data into an array of binary values
 def parse_pkt_hex_data(_data):
+    hex_srt = 6
+    hex_end = 53
     pkt = ''
     pkt_bytes = []
     line_num_idx = get_pkt_line_srt_idx(_data)
     for i in range(len(line_num_idx)):
         if i < len(line_num_idx) - 1:
             temp = _data[int(line_num_idx[i, 1]):int(line_num_idx[i + 1, 1])]
-            hex_srt = temp.find('  ')
-            hex_end = temp.find('   ')
-            temp = temp[hex_srt + 2:hex_end].replace(' ', '')
+            temp = temp[hex_srt:hex_end].replace(' ', '')
             pkt = pkt + temp
             if line_num_idx[i + 1, 0][:4] == hex_line_nums[0]:
                 pkt = "{:0<3036}".format(pkt)
                 pkt_hex_bytes = re.findall('..', pkt)
                 for j in range(len(pkt_hex_bytes)):
                     pkt_bytes.append(convert_hex_to_bin(pkt_hex_bytes[j]))
-                f = open(r'D:\ECE697\packets.txt', 'a')
-                f.write(str(pkt_bytes)[1:-1] + '\n')
-                f.close()
+                if len(pkt_bytes) <= 1518:
+                    f = open(pkt_export_file_path, 'a')
+                    f.write(str(pkt_bytes)[1:-1] + '\n')
+                    f.close()
                 pkt = ''
                 pkt_bytes = []
         else:
             temp = _data[int(line_num_idx[i, 1]):]
-            hex_srt = temp.find('  ')
-            hex_end = temp.find('   ')
-            temp = temp[hex_srt + 2:hex_end].replace(' ', '')
+            temp = temp[hex_srt:hex_end].replace(' ', '')
             pkt = pkt + temp
             pkt = "{:0<3036}".format(pkt)
             pkt_hex_bytes = re.findall('..', pkt)
             for j in range(len(pkt_hex_bytes)):
                 pkt_bytes.append(convert_hex_to_bin(pkt_hex_bytes[j]))
-            f = open(r'D:\ECE697\packets.txt', 'a')
-            f.write(str(pkt_bytes)[1:-1])
-            f.close()
+            if len(pkt_bytes) <= 1518:
+                f = open(pkt_export_file_path, 'a')
+                f.write(str(pkt_bytes)[1:-1])
+                f.close()
             pkt = ''
             pkt_bytes = []
 

@@ -1,4 +1,4 @@
-mport pandas as pd
+import pandas as pd
 import numpy as np
 import re
 
@@ -28,7 +28,7 @@ def find_all(_str, _sub_str):
 # Find the indexes of where each packet starts
 def get_pkt_line_srt_idx(_data):
     line_num_idx = []
-    pattern = re.compile('|'.join(hex_line_nums[:, 0] + r'  +[0-9a-f]+[0-9a-f]'))
+    pattern = re.compile('|'.join(hex_line_nums[:, 0] + r'  +[0-9a-f]+[0-9a-f] '))
     matches = pattern.finditer(_data)
     matches = list(matches)
     idx = [m.start(0) for m in matches]

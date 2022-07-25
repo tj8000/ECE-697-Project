@@ -2,35 +2,14 @@ import pandas as pd
 import numpy as np
 import re
 
-#peer review
 
-hexdump_file_path = input('Enter hexdump txt file path:')
-pkt_export_file_path = input('Enter file path to export packet bytes file:')
-
-# Read in hex line number list
-hex_line_nums = pd.read_csv('hex_line_nums.csv', header=None)
-hex_line_nums = np.array(hex_line_nums)
-
-# Read in pcap txt hexdump data
-txt = open(hexdump_file_path, 'r')
-data = txt.read()
-
-
-# Find all instances of a sub string in a string
-def find_all(_str, _sub_str):
-    start = 0
-    while True:
-        start = _str.find(_sub_str, start)
-        if start == -1:
-            return
-        yield [_sub_str, start]
-        start += len(_sub_str)
+#peer review for Cameron Boeder
 
 
 # Find the indexes of where each packet starts
 def get_pkt_line_srt_idx(_data):
     line_num_idx = []
-    pattern = re.compile('|'.join(hex_line_nums[:, 0] + r'  +[0-9a-f]+[0-9a-f] '))
+    pattern = re.compile('|'.join(hex_line_nums[:, 0] + r'\s\s[0-9a-f]+[0-9a-f]\s'))
     matches = pattern.finditer(_data)
     matches = list(matches)
     idx = [m.start(0) for m in matches]
@@ -85,4 +64,17 @@ def parse_pkt_hex_data(_data):
             pkt_bytes = []
 
 
-parse_pkt_hex_data(data)
+if __name__ == '__main__':
+    hexdump_file_path = input('Enter hexdump txt file path:')
+    pkt_export_file_path = input('Enter file path for where to save packet bytes file:')
+
+    # Read in hex line number list
+    hex_line_nums = pd.read_csv('hex_line_nums.csv', header=None)
+    hex_line_nums = np.array(hex_line_nums)
+
+    # Read in pcap txt hexdump data
+    txt = open(hexdump_file_path, 'r')
+    data = txt.read()
+
+    parse_pkt_hex_data(data)
+

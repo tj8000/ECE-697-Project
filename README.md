@@ -2,7 +2,7 @@
 
 ### Cameron Boeder, Troy Januchowski
 
-### ECE 697 Codebase
+### ECE 697 Project Codebase
 
 ### 8/19/22
 

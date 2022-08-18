@@ -59,7 +59,7 @@ This file contains instructions on how to extract manual and NLP features from t
 
 This file is included in the codebase to show the code structure used for creating the scenario 1-3 datasets. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase.
 
-## 3h. Scenario 4
+## 3h. Scenario 4 Dataset Creation.ipynb
 
 # 4. Sample Dataset
 
@@ -68,6 +68,8 @@ A small sample dataset was created for the purpose of testing this codebase. The
 The sample dataset comes in two different file formats: one format is the .csv output from a packet analyzer, and the second format is .pcap. The Manual and NLP feature extractors use the .csv as input, whereas the autoencoder uses the .pcap as input. The third file included for the dataset is a separate .csv file that contains the 500 labels.
 
 The sample dataset in .csv format, .pcap format, and the labels can be found in the "codebase sample dataset" folder of the project github.
+
+Note: the sample dataset uses 500 packets from the SUEE 2017 dataset, reference: https://github.com/vs-uulm/2017-SUEE-data-set
 
 # 5. How to load and run python files and dataset
 

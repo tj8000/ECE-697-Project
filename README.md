@@ -55,7 +55,9 @@ This file contains instructions on how to extract manual and NLP features from t
 ## 3g. LSTM testing notebook walk the user through
 
 
-## 3g. Scenario 1
+## 3g. Scenario 1 Dataset Creation.ipynb
+
+This file is included in the codebase to show the code structure used for creating the scenario 1-3 datasets. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase.
 
 ## 3h. Scenario 4
 

@@ -12,7 +12,7 @@ Project Abstract: The ability to detect zero-day (novel) attacks has become esse
 
 1. Purpose of Codebase
 
-1. Project Description
+1. Project Abstract
 
 1. File Descriptions
 
@@ -24,7 +24,9 @@ Project Abstract: The ability to detect zero-day (novel) attacks has become esse
 
 The purpose of this codebase is to provide a copy of the code used throughout this capstone project. This codebase can also be used as a guide for anyone who wants to run this code on their local machine. A sample dataset of 500 samples has been included in this codebase to run with the code. All train/test datasets used throughout this project have not been included in this codebase repository. 
 
-# 2. Project Description
+# 2. Project Abstract
+
+The ability to detect zero-day (novel) attacks has become essential in the network security industry. Due to ever evolving attack signatures, existing network intrusion detection systems often fail to detect these threats. This project aims to solve the task of detecting zero-day DDoS (distributed denial-of-service) attacks by utilizing network traffic that is captured before entering a private network. Modern feature extraction techniques are used in conjunction with neural networks in order to determine if a network packet is either benign or malicious.
 
 # 3. File Descriptions
 

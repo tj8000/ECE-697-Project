@@ -6,8 +6,6 @@
 
 ### 8/19/22
 
-Project Abstract: The ability to detect zero-day (novel) attacks has become essential in the network security industry. Due to ever evolving attack signatures, existing network intrusion detection systems often fail to detect these threats. This project aims to solve the task of detecting zero-day DDoS (distributed denial-of-service) attacks by utilizing network traffic that is captured before entering a private network. Modern feature extraction techniques are used in conjunction with neural networks in order to determine if a network packet is either benign or malicious.
-
 # Table of Contents
 
 1. Purpose of Codebase

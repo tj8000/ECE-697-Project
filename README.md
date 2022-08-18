@@ -22,6 +22,8 @@ Project Abstract: The ability to detect zero-day (novel) attacks has become esse
 
 # 1. Purpose of Codebase
 
+The purpose of this codebase is to provide a copy of the code used throughout this capstone project. This codebase can also be used as a guide for anyone who wants to run this code on their local machine. A sample dataset of 500 samples has been included in this codebase to run with the code. All train/test datasets used throughout this project have not been included in this codebase repository. 
+
 # 2. Project Description
 
 # 3. File Descriptions

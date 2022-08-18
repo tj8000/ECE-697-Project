@@ -44,19 +44,20 @@ This file contains instructions on how to extract manual and NLP features from t
 
 
 
-## 3d. 
+## 3d. create AE dataset
 
 
-## 3e.
+## 3e. create LSTM dataset
+
+## 3f. AE and LSTM training 
 
 
-## 3f.
+## 3g. LSTM testing notebook walk the user through
 
 
-## 3g.
+## 3g. Scenario 1
 
-
-## 3h.
+## 3h. Scenario 4
 
 # 4. Sample Dataset
 
@@ -71,4 +72,6 @@ The sample dataset in .csv format, .pcap format, and the labels can be found in 
 First, download the code repository, including the sample dataset folder, to your local machine. Place files in on a Google Drive.
 
 **MLP Testing Notebook.ipynb**: open this notebook in a Google colab environment. There are instructions within the notebook that walk the user through the running of each cell. This notebook calls on the manual_feature_data_generation_functions.py and nlp_feature_data_generation_functions.py files, as well as imports the sample dataset files. When running the file, make sure to replace the drive location of the manual_feature_data_generation_functions.py file, nlp_feature_data_generation_functions.py file, and the sample data files to wherever you have copied them to your Google drive. The remaining instructions are within the notebook file. The notebook walks the user through each step.
+
+**LSTM Testing Notebook.ipynb**:
 

@@ -62,6 +62,11 @@ A small sample dataset was created for the purpose of testing this codebase. The
 
 The sample dataset comes in two different file formats: one format is the .csv output from a packet analyzer, and the second format is .pcap. The Manual and NLP feature extractors use the .csv as input, whereas the autoencoder uses the .pcap as input. The third file included for the dataset is a separate .csv file that contains the 500 labels.
 
-The sample dataset in .csv format, .pcap format, and the labels can be found in the "Sample Dataset" folder of the project github.
+The sample dataset in .csv format, .pcap format, and the labels can be found in the "codebase sample dataset" folder of the project github.
 
 # 5. How to load and run python files and dataset
+
+First, download the code repository, including the sample dataset folder, to your local machine. Place files in on a Google Drive.
+
+**MLP Testing Notebook.ipynb**: open this notebook in a Google colab environment. There are instructions within the notebook that walk the user through the running of each cell. This notebook calls on the manual_feature_data_generation_functions.py and nlp_feature_data_generation_functions.py files, as well as imports the sample dataset files. When running the file, make sure to replace the drive location of the manual_feature_data_generation_functions.py file, nlp_feature_data_generation_functions.py file, and the sample data files to wherever you have copied them to your Google drive. The remaining instructions are within the notebook file. The notebook walks the user through each step.
+

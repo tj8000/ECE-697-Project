@@ -28,6 +28,10 @@ The purpose of this codebase is to provide a copy of the code used throughout th
 
 The ability to detect zero-day (novel) attacks has become essential in the network security industry. Due to ever evolving attack signatures, existing network intrusion detection systems often fail to detect these threats. This project aims to solve the task of detecting zero-day DDoS (distributed denial-of-service) attacks by utilizing network traffic that is captured before entering a private network. Modern feature extraction techniques are used in conjunction with neural networks in order to determine if a network packet is either benign or malicious.
 
+# 3. References
+
+Any code used from a source has been reference via a comment directly next to that specific line of code. Note that the MLP and LSTM testing .ipynb notebooks call functions from separate .py files - these .py function files also contain code references.
+
 # 4. File Descriptions
 
 ## 4a. manual_feature_data_generation_functions.py

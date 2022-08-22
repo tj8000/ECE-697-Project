@@ -12,6 +12,8 @@
 
 1. Project Abstract
 
+1. References
+
 1. File Descriptions
 
 1. Sample dataset
@@ -26,42 +28,42 @@ The purpose of this codebase is to provide a copy of the code used throughout th
 
 The ability to detect zero-day (novel) attacks has become essential in the network security industry. Due to ever evolving attack signatures, existing network intrusion detection systems often fail to detect these threats. This project aims to solve the task of detecting zero-day DDoS (distributed denial-of-service) attacks by utilizing network traffic that is captured before entering a private network. Modern feature extraction techniques are used in conjunction with neural networks in order to determine if a network packet is either benign or malicious.
 
-# 3. File Descriptions
+# 4. File Descriptions
 
-## 3a. manual_feature_data_generation_functions.py
+## 4a. manual_feature_data_generation_functions.py
 
 This file is used to generate manual features and batched manual features from the .csv pcap file format. This python script contains two functions that should be called from the MLP Testing Notebook.ipynb. The functions contained in this file generate manual features to be used for classification testing. There are instructions within the MLP Testing Notebook.ipynb that walk through the use of the functions contained in this file.
 
-## 3b. nlp_feature_data_generation_functions.py
+## 4b. nlp_feature_data_generation_functions.py
 
 This file is used to generate NLP features and batched NLP features from the .csv pcap file format. This file also contains a function to fine tune the Hugging Face Distilbert model. This python script contains three functions that should be called from the MLP Testing Notebook.ipynb. The functions contained in this file generate NLP features to be used for classification testing. There are instructions within the MLP Testing Notebook.ipynb that walk through the use of the functions contained in this file.
 
 
-## 3c. MLP Testing Notebook.ipynb
+## 4c. MLP Testing Notebook.ipynb
 
 This file contains instructions on how to extract manual and NLP features from the sample dataset. This file also contains the 5 MLP testing variations used in our project. All of the feature extraction techniques used in this notebook are ran through each of the 5 MLP models. This file is intended to be opened in a Google colab environment. There are instructions within this file on how to run each cell. Note that there are file locations that will need to be set in order to import the sample dataset.
 
 
 
 
-## 3d. create AE dataset
+## 4d. create AE dataset
 
 
-## 3e. create LSTM dataset
+## 4e. create LSTM dataset
 
-## 3f. AE and LSTM training 
-
-
-## 3g. LSTM testing notebook walk the user through
+## 4f. AE and LSTM training 
 
 
-## 3g. Scenario 1 Dataset Creation.ipynb
+## 4g. LSTM testing notebook walk the user through
+
+
+## 4g. Scenario 1 Dataset Creation.ipynb
 
 This file is included in the codebase to show the code structure used for creating the scenario 1-3 datasets. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase.
 
-## 3h. Scenario 4 Dataset Creation.ipynb
+## 4h. Scenario 4 Dataset Creation.ipynb
 
-# 4. Sample Dataset
+# 5. Sample Dataset
 
 A small sample dataset was created for the purpose of testing this codebase. The sample includes 500 network data packets from the test set used in scenarios 1-4 of our project. The sample data set includes both benign and attack packets, labeled 0 and 1 respectively. There is a roughly 50/50 split between 0 and 1 labels in this sample dataset.
 
@@ -71,7 +73,7 @@ The sample dataset in .csv format, .pcap format, and the labels can be found in 
 
 Note: the sample dataset uses 500 packets from the SUEE 2017 dataset, reference: https://github.com/vs-uulm/2017-SUEE-data-set
 
-# 5. How to load and run python files and dataset
+# 6. How to load and run python files and dataset
 
 First, download the code repository, including the sample dataset folder, to your local machine. Place files in on a Google Drive.
 

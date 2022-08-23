@@ -42,30 +42,53 @@ This file is used to generate manual features and batched manual features from t
 
 This file is used to generate NLP features and batched NLP features from the .csv pcap file format. This file also contains a function to fine tune the Hugging Face Distilbert model. This python script contains three functions that should be called from the MLP Testing Notebook.ipynb. The functions contained in this file generate NLP features to be used for classification testing. There are instructions within the MLP Testing Notebook.ipynb that walk through the use of the functions contained in this file.
 
-
 ## 4c. MLP Testing Notebook.ipynb
 
 This file contains instructions on how to extract manual and NLP features from the sample dataset. This file also contains the 5 MLP testing variations used in our project. All of the feature extraction techniques used in this notebook are ran through each of the 5 MLP models. This file is intended to be opened in a Google colab environment. There are instructions within this file on how to run each cell. Note that there are file locations that will need to be set in order to import the sample dataset.
 
+## 4d. train_autoencoder.py
 
+Given input data, this python script is used to train the autoencoder model.
 
+## 4e. fine_tune_nlp.py
 
-## 4d. create AE dataset
+Given input data and labels, this python script is used to fine tune the Distilbert NLP model.
 
+## 4f. autoencoder_feature_generator.py
 
-## 4e. create LSTM dataset
+Given input data, this python script will generator autoencoder features using an already trained encoder model.
 
-## 4f. AE and LSTM training 
+## 4g. manual_feature_generator.py
 
+Given input data, this python script will generator manual features.
 
-## 4g. LSTM testing notebook walk the user through
+## 4h. nlp_feature_generator.py
 
+Given input data, this python script will generator NLP features using a fine tuned Distilbert NLP model.
 
-## 4g. Scenario 1 Dataset Creation.ipynb
+## 4i. create_lstm_inputs.py
 
-This file is included in the codebase to show the code structure used for creating the scenario 1-3 datasets. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase.
+Given input features and a specified input timestep, this python script will create input timestep data for the LSTM model.
 
-## 4h. Scenario 4 Dataset Creation.ipynb
+## 4j. lstm_model.py
+
+Given input timestep features, this python script will create, train, and test the LSTM model.
+
+## 4k. lstm_classification_testing.py
+
+This script uses the autoencoder_feature_generator.py, manual_feature_generator.py, nlp_feature_generator.py, create_lstm_inputs.py, and lstm_model.py scripts to perform end to end testing of the LSTM model. This script lets the user decide what feature extraction technique to use, what the LSTM input timestep should be, how the LSTM input timesteps should be created, what the LSTM hyperparameters are, and how to split up the training and testing data.
+
+## 4l. LSTM_Sample_Code_Notebook.ipynb
+
+This google colab python notebook, walks the user through how to use the train_autoencoder.py, fine_tune_nlp.py, and lstm_classification_testing.py scripts using the codebase sample dataset stored on the supplementary material google drive (https://drive.google.com/drive/folders/1hfz-N2XZDlBGXl0WxZ7MMmnPKSLsDvyb?usp=sharing). 
+
+## 4m. Scenario 1 Dataset Creation.ipynb
+
+This file is included in the codebase to show the code structure used for creating the scenario 1-3 datasets. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase. Scenario 1-3 datasets can be found on the supplementary material google drive (https://drive.google.com/drive/folders/1hfz-N2XZDlBGXl0WxZ7MMmnPKSLsDvyb?usp=sharing).
+
+## 4n. Scenario_4_Dataset_Creation.ipynb
+
+This file is included in the codebase to show the code structure used for creating the scenario 4 dataset. This is meant to be a standalone file just to show how the pcap files were generated. The data files called in this file have not been included in this codebase. Scenario 1-3 datasets can be found on the supplementary material google drive (https://drive.google.com/drive/folders/1hfz-N2XZDlBGXl0WxZ7MMmnPKSLsDvyb?usp=sharing).
 
 # 5. Sample Dataset
 
@@ -75,6 +98,8 @@ The sample dataset comes in two different file formats: one format is the .csv o
 
 The sample dataset in .csv format, .pcap format, and the labels can be found in the "codebase sample dataset" folder of the project github.
 
+The sample dataset is also stored on the supplementary material google drive (https://drive.google.com/drive/folders/1hfz-N2XZDlBGXl0WxZ7MMmnPKSLsDvyb?usp=sharing).
+
 Note: the sample dataset uses 500 packets from the SUEE 2017 dataset, reference: https://github.com/vs-uulm/2017-SUEE-data-set
 
 # 6. How to load and run python files and dataset
@@ -83,5 +108,5 @@ First, download the code repository, including the sample dataset folder, to you
 
 **MLP Testing Notebook.ipynb**: open this notebook in a Google colab environment. There are instructions within the notebook that walk the user through the running of each cell. This notebook calls on the manual_feature_data_generation_functions.py and nlp_feature_data_generation_functions.py files, as well as imports the sample dataset files. When running the file, make sure to replace the drive location of the manual_feature_data_generation_functions.py file, nlp_feature_data_generation_functions.py file, and the sample data files to wherever you have copied them to your Google drive. The remaining instructions are within the notebook file. The notebook walks the user through each step.
 
-**LSTM Testing Notebook.ipynb**:
+**LSTM Testing Notebook.ipynb**: open this notebook in a Google colab environment. There are instructions within the notebook that walk the user through the running of each cell.
 

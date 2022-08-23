@@ -56,15 +56,15 @@ Given input data and labels, this python script is used to fine tune the Distilb
 
 ## 4f. autoencoder_feature_generator.py
 
-Given input data, this python script will generator autoencoder features using an already trained encoder model.
+Given input data, this python script will generate autoencoder features using an already trained encoder model.
 
 ## 4g. manual_feature_generator.py
 
-Given input data, this python script will generator manual features.
+Given input data, this python script will generate manual features.
 
 ## 4h. nlp_feature_generator.py
 
-Given input data, this python script will generator NLP features using a fine tuned Distilbert NLP model.
+Given input data, this python script will generate NLP features using a fine tuned Distilbert NLP model.
 
 ## 4i. create_lstm_inputs.py
 

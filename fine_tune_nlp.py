@@ -63,54 +63,54 @@ def fine_tune_nlp(_pcap_csv_file_path, _pcap_label_file_path):
 
   X_train, X_test, y_train, y_test = train_test_split(input_data, input_labels, test_size=0.3, random_state=42) # split the dataset into train/test for the purpose of creating a data dictionary to fine tune the NLP model
 
-  # train portion of the data dictionary
-  train_data = pd.DataFrame({
-      "label" : y_train,
-      "text" : X_train
+  # train portion of the data dictionary 
+  train_data = pd.DataFrame({ #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+      "label" : y_train, #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+      "text" : X_train #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
   }) 
 
   # test portion of the data dictionary
-  test_data = pd.DataFrame({
-      "label" : y_test,
-      "text" : X_test
+  test_data = pd.DataFrame({ #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+      "label" : y_test, #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+      "text" : X_test #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
   })
 
   # create the data dictionary using both the train and test portion
-  train_dataset = Dataset.from_dict(train_data)
-  test_dataset = Dataset.from_dict(test_data) 
-  my_dataset_dict = datasets.DatasetDict({"train":train_dataset, "test":test_dataset})
+  train_dataset = Dataset.from_dict(train_data) #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+  test_dataset = Dataset.from_dict(test_data)  #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
+  my_dataset_dict = datasets.DatasetDict({"train":train_dataset, "test":test_dataset}) #https://stackoverflow.com/questions/71618974/convert-pandas-dataframe-to-datasetdict
 
-  tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased") # load Distilbert tokenizer from Hugging Face
+  tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased") # load Distilbert tokenizer from Hugging Face #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
-  def preprocess_function(examples):
-    return tokenizer(examples["text"], truncation=True) 
+  def preprocess_function(examples): #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    return tokenizer(examples["text"], truncation=True)  #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
 
-  tokenized = my_dataset_dict.map(preprocess_function, batched=True) # tokenize the Info strings from the newly created data dictionary 
+  tokenized = my_dataset_dict.map(preprocess_function, batched=True) # tokenize the Info strings from the newly created data dictionary  #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
-  data_collator = DataCollatorWithPadding(tokenizer=tokenizer) # load model for fine tuning
+  data_collator = DataCollatorWithPadding(tokenizer=tokenizer) # load model for fine tuning #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
-  model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2)
+  model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=2) #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
-  training_args = TrainingArguments(
-    output_dir="./results",
-    learning_rate=2e-5,
-    per_device_train_batch_size=15,
-    per_device_eval_batch_size=15,
-    num_train_epochs=1, 
-    weight_decay=0.01,
+  training_args = TrainingArguments( #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    output_dir="./results", #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    learning_rate=2e-5, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    per_device_train_batch_size=15, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    per_device_eval_batch_size=15, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    num_train_epochs=1,  #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    weight_decay=0.01, #https://huggingface.co/docs/transformers/tasks/sequence_classification
   )
 
-  trainer = Trainer(
-    model=model,
-    args=training_args,
-    train_dataset=tokenized["train"],
-    eval_dataset=tokenized["test"],
-    tokenizer=tokenizer,
-    data_collator=data_collator,
+  trainer = Trainer( #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    model=model, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    args=training_args, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    train_dataset=tokenized["train"], #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    eval_dataset=tokenized["test"], #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    tokenizer=tokenizer, #https://huggingface.co/docs/transformers/tasks/sequence_classification
+    data_collator=data_collator, #https://huggingface.co/docs/transformers/tasks/sequence_classification
   )
 
-  trainer.train() # fine tune Hugging Face Distilbert model
+  trainer.train() # fine tune Hugging Face Distilbert model #https://huggingface.co/docs/transformers/tasks/sequence_classification
 
   model.save_pretrained('fine_tuned_nlp')
 

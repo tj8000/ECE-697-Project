@@ -52,34 +52,34 @@ def create_nlp_features(_pcap_csv_file_path, _fine_tuned_nlp_file_path, _set):
 
     batch = input_data[start_index:end_index] # isolate batch of samples that are going to have sentence embeddings generated this batch
 
-    tokenized = batch.apply((lambda x: tokenizer.encode(x, add_special_tokens=True))) # tokenize sample strings
+    tokenized = batch.apply((lambda x: tokenizer.encode(x, add_special_tokens=True))) # tokenize sample strings #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
 
     # loop to pad tokenized values
-    max_len = 0 
-    for j in tokenized.values: 
-        if len(j) > max_len: 
-            max_len = len(j) 
-    padded = np.array([k + [0]*(max_len-len(k)) for k in tokenized.values])
+    max_len = 0  #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+    for j in tokenized.values: #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+        if len(j) > max_len: #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+            max_len = len(j)  #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+    padded = np.array([k + [0]*(max_len-len(k)) for k in tokenized.values]) #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
 
     # have model ignore the masks
-    attention_mask = np.where(padded != 0, 1, 0)
-    attention_mask.shape
+    attention_mask = np.where(padded != 0, 1, 0) #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+    attention_mask.shape #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
 
     # create torch tensors from both input ids and masks
     # both are required inputs for Distilbert
-    input_ids = torch.tensor(padded)   
-    attention_mask = torch.tensor(attention_mask)
+    input_ids = torch.tensor(padded)   #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+    attention_mask = torch.tensor(attention_mask) #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
 
     # limit tokens to 512, the Distilbert limit
     input_ids = input_ids[:, 0:512]
     attention_mask = attention_mask[:, 0:512]
 
     # predict using fine tuned model
-    with torch.no_grad():
-      last_hidden_states = model.distilbert(input_ids, attention_mask=attention_mask)
+    with torch.no_grad(): #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+      last_hidden_states = model.distilbert(input_ids, attention_mask=attention_mask) #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
     
     # extract features from first position in each sentence embedding provided by Distilbert
-    features = last_hidden_states[0][:, 0, :].numpy()
+    features = last_hidden_states[0][:, 0, :].numpy() #https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
 
     pcap_nlp_features = np.append(pcap_nlp_features, features, axis=0)
     

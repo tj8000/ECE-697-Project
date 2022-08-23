@@ -34,6 +34,7 @@ def fine_tune_nlp_file_paths_prompt():
 
 # This function references code developed at
 # https://huggingface.co/docs/transformers/tasks/sequence_classification
+# This function was apapted from nlp_feature_data_generation_functions.py
 # Function to fine tune the Hugging Face Distilbert model 
 def fine_tune_nlp(_pcap_csv_file_path, _pcap_label_file_path):
   install('torch-summary') # install torch-summary package

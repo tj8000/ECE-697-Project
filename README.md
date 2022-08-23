@@ -22,7 +22,7 @@
 
 # 1. Purpose of Codebase
 
-The purpose of this codebase is to provide a copy of the code used throughout this capstone project. This codebase can also be used as a guide for anyone who wants to run this code on their local machine. A sample dataset of 500 samples has been included in this codebase to run with the code. All train/test datasets used throughout this project have not been included in this codebase repository. 
+The purpose of this codebase is to provide a copy of the code used throughout this capstone project. This codebase can also be used as a guide for anyone who wants to run this code on their local machine. A sample dataset of 500 samples has been included in this codebase to run with the code. All train/test datasets used throughout this project have not been included in this codebase repository but can be found on the supplemental material google drive (https://drive.google.com/drive/folders/1hfz-N2XZDlBGXl0WxZ7MMmnPKSLsDvyb?usp=sharing). 
 
 # 2. Project Abstract
 
@@ -52,7 +52,7 @@ Given input data, this python script is used to train the autoencoder model.
 
 ## 4e. fine_tune_nlp.py
 
-Given input data and labels, this python script is used to fine tune the Distilbert NLP model.
+Given input data and labels, this python script is used to fine tune the Distilbert NLP model. This script was adapted from nlp_feature_data_generation_functions.py for use by the LSTM model.
 
 ## 4f. autoencoder_feature_generator.py
 
@@ -64,7 +64,7 @@ Given input data, this python script will generate manual features.
 
 ## 4h. nlp_feature_generator.py
 
-Given input data, this python script will generate NLP features using a fine tuned Distilbert NLP model.
+Given input data, this python script will generate NLP features using a fine tuned Distilbert NLP model. This script was adapted from nlp_feature_data_generation_functions.py for use by the LSTM model.
 
 ## 4i. create_lstm_inputs.py
 

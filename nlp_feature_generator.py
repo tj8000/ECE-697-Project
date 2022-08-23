@@ -7,6 +7,7 @@ def install(package):
 
 # This function references code developed at 
 # https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb
+# This function was adapted from nlp_feature_data_generation_functions.py
 # Function to convert pcap wireshark info data into NLP features
 def create_nlp_features(_pcap_csv_file_path, _fine_tuned_nlp_file_path, _set):
   install('transformers') # install the transformers package
